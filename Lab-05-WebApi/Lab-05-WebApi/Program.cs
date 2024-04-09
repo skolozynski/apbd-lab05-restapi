@@ -1,3 +1,5 @@
+using Lab_05_WebApi.Endpoints;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,21 +19,23 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // MinimalAPI
-app.MapGet("/animals", () =>
-{
-    return Results.Ok();
-});
-app.MapGet("/animals/{id:int}", (int id) =>
-{
-    return Results.Ok(id);
-});
-
-app.MapPost("/animals", () =>
-{
-    return Results.Created();
-});
-
-
+// app.MapGet("/animals", () =>
+// {
+//     return Results.Ok();
+// });
+// app.MapGet("/animals/{id:int}", (int id) =>
+// {
+//     return Results.Ok(id);
+// });
 //
+// app.MapPost("/animals", () =>
+// {
+//     return Results.Created();
+// });
+
+
+// Minimap Api
+app.MapAnimalEndpoints();
+
 
 app.Run();
