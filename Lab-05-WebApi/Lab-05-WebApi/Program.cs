@@ -1,5 +1,4 @@
 using Lab_05_WebApi.Database;
-using Lab_05_WebApi.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,10 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// tu dodajemy kontrolery
 builder.Services.AddControllers();
-
-// dodawanie singletonu jesli klasa nie jest static -- preferowane rozwiazanie
 builder.Services.AddSingleton<MockDb>();
 
 var app = builder.Build();
@@ -25,28 +21,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// MinimalAPI
-/*app.MapGet("/animals", () =>
-{
-    return Results.Ok();
-});
-app.MapGet("/animals/{id:int}", (int id) =>
-{
-    return Results.Ok(id);
-});
-
-app.MapPost("/animals", () =>
-{
-    return Results.Created();
-});*/
-
-
-// Minimap Api
-// app.MapAnimalEndpoints();
-
-
-//Controllers
-// tu dodajemy po stworzeniu Controlerow
 app.MapControllers();
 
 app.Run();
