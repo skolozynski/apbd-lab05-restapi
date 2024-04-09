@@ -1,4 +1,7 @@
-﻿namespace Lab_05_WebApi.Endpoints;
+﻿using Lab_05_WebApi.Database;
+using Lab_05_WebApi.Models;
+
+namespace Lab_05_WebApi.Endpoints;
 
 public static class AnimalEndpoints
 {
@@ -6,16 +9,17 @@ public static class AnimalEndpoints
     {
         app.MapGet("/animals", () =>
         {
-            return Results.Ok();
+            var animals = StaticData.animals;
+            return Results.Ok(animals);
         });
         app.MapGet("/animals/{id:int}", (int id) =>
         {
             return Results.Ok(id);
         });
 
-        app.MapPost("/animals", () =>
+        app.MapPost("/animals", (Animal animal) =>
         {
-            return Results.Created();
+            return Results.Created("", animal);
         });
         
     }

@@ -1,3 +1,4 @@
+using Lab_05_WebApi.Database;
 using Lab_05_WebApi.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ builder.Services.AddSwaggerGen();
 
 // tu dodajemy kontrolery
 builder.Services.AddControllers();
+
+// dodawanie singletonu jesli klasa nie jest static -- preferowane rozwiazanie
+builder.Services.AddSingleton<MockDb>();
 
 var app = builder.Build();
 

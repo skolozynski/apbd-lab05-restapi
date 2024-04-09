@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Lab_05_WebApi.Database;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Lab_05_WebApi.Controllers;
 
@@ -10,6 +11,7 @@ public class AnimalsController : ControllerBase
     [HttpGet]
     public IActionResult GetAnimals()
     {
+        var animals = new MockDb().Animals;
         return Ok();
     }
 
