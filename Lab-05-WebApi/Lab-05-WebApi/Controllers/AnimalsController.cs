@@ -27,28 +27,42 @@ public class AnimalsController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult AddAnimal()
+    public IActionResult AddAnimal(Animal animal)
     {
         var animals = new MockDb().Animals;
-        // TODO
+        var ifExist = animals.FirstOrDefault(x => x.Id == animal.Id);
+        if (ifExist != null)
+        {
+            return Conflict("Animal with this ID already exists");
+        }
+        animals.Add(animal);
         
-        return Created();
+        return Created("", animal);
     }
     
     [HttpPut("{id}")]
-    public IActionResult UpdateAnimal(int id)
+    public IActionResult UpdateAnimal(int id, [FromBody] Animal animal)
     {
         var animals = new MockDb().Animals;
-        // TODO
+        var animalToChange = animals.FirstOrDefault(x => x.Id == id);
+        if (animalToChange == null)
+        {
+            return NotFound();
+        }
+        animalToChange = animal; 
         
-        return Ok();
+        return Ok(animal);
     }
     
     [HttpDelete("{id}")]
     public IActionResult DeleteAnimal(int id)
     {
         var animals = new MockDb().Animals;
-        animals.RemoveAll(x => x.Id == id);
-        return NotFound();
+        var removed = animals.RemoveAll(x => x.Id == id);
+        if (removed == 0)
+        {
+            return NotFound("Animal with this ID does not exist");
+        }
+        return Ok();
     }
 }

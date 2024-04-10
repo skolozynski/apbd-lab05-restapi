@@ -19,6 +19,8 @@ public class MockDb
             new Animal(4, "Krolik", "Rabbit", 1.5, "Grey"));
         
         Visits.Add(
-            new Visit(1, 2, DateTime.Now, "Vaccination", 50.0));
+            new Visit(1, 2, DateTime.Now.AddDays(-2), "Vaccination", 50.0));
+        Visits.Add(
+            new Visit(2, 4, DateTime.Now.AddDays(-4) , "Health Check", 25.0));
     }
 }
